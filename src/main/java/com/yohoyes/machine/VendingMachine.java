@@ -1,5 +1,4 @@
 package com.yohoyes.machine;
-
 import com.yohoyes.beverages.Drinks;
 import com.yohoyes.exception.NoEnoughMoneyException;
 import com.yohoyes.exception.NoSuchDrinksException;
