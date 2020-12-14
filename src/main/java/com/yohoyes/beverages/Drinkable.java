@@ -1,7 +1,7 @@
 package com.yohoyes.beverages;
 
 /**
- * 饮料的公有父类
+ * 饮料的公有接口
  * @author yohoyes
  */
 public interface Drinkable {
@@ -13,7 +13,8 @@ public interface Drinkable {
 
     /**
      * 获取饮料的价格
+     * @return price
      */
-    public int getPrice();
+    public double getPrice();
 
 }

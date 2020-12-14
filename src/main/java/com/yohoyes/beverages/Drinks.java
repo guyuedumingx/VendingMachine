@@ -4,28 +4,32 @@ package com.yohoyes.beverages;
  * 饮料的实现类
  * @author yohoyes
  */
-public class Drinks implements Drinkable {
-    protected int price;
-    protected int capacity;
-    protected String unit;
+public abstract class Drinks implements Drinkable {
+    protected double price;
+    protected int capacity = 300;
+    protected String unit = "ml";
     protected String name;
 
-    public Drinks(String name, int price) {
+
+    public Drinks() {}
+
+    public Drinks(String name, double price) {
         this.name = name;
         this.price = price;
     }
 
     @Override
-    public void drinks() {
-    }
-
-    @Override
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public int getCapacity() {
-        return capacity;
+    @Override
+    public void drinks() {
+        System.out.println("你喝了 "+ getCapacity() + "的 " + getName());
+    }
+
+    public String getCapacity() {
+        return capacity+getUnit();
     }
 
     public String getUnit() {
@@ -50,32 +54,6 @@ public class Drinks implements Drinkable {
 
     public void setName(String name) {
         this.name = name;
-    }
-}
-
-class Builder {
-
-    protected Drinks drinks = null;
-    protected String unit = 'ml';
-    protected int capacity = 300;
-
-    public Builder(String name, int price) {
-        drinks.setName(name);
-        drinks.setPrice(price);
-        drinks.setUnit(unit);
-        drinks.setCapacity(capacity);
-    }
-
-    public Drinks build() {
-        return drinks;
-    }
-
-    public void unit(String unit) {
-        drinks.setUnit(unit);
-    }
-
-    public void capacity(int capacity) {
-        drinks.setCapacity(capacity);
     }
 
 }
