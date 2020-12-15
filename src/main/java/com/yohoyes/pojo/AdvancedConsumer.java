@@ -4,7 +4,7 @@ package com.yohoyes.pojo;
 /**
  * 会员用户
  * 默认喜欢Pepsi
- *
+ * 享受6折优惠
  * @author Florence
  */
 public class AdvancedConsumer extends User {

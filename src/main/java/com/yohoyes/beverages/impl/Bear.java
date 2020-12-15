@@ -17,6 +17,6 @@ public class Bear extends Drinks {
 
     @Override
     public void ad() {
-        System.out.printf("我有故事，你有酒吗？");
+        System.out.println("我有故事，你有酒吗？");
     }
 }

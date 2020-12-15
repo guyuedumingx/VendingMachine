@@ -47,8 +47,8 @@ public class Main {
         machine.show();
         currentUser = setOperator();
         int i = showOpera();
-        //操作符是6则退出
-        while (i != 6) {
+        //操作符是7则退出
+        while (i != 7) {
             opera(i);
             i = showOpera();
         }
@@ -67,7 +67,8 @@ public class Main {
         System.out.println("[3] 购买");
         System.out.println("[4] 通知老板填充货架");
         System.out.println("[5] 切换用户");
-        System.out.println("[6] 退出");
+        System.out.println("[6] 设置用户喜欢的饮料");
+        System.out.println("[7] 退出");
         System.out.print("请输入命令： ");
         return in.nextInt();
     }
@@ -95,6 +96,9 @@ public class Main {
             System.out.println("货架填充完成");
         }else if(i == 5){
             currentUser = setOperator();
+        }else if(i == 6){
+            System.out.print(currentUser.getName()+" 喜欢的饮料是: ");
+            currentUser.setPreferDrinks(in.next());
         }else {
             System.out.println("输入错误");
 
