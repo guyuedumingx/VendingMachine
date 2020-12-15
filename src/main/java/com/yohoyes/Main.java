@@ -58,7 +58,6 @@ public class Main {
      * 显示操作帮助
      * 等待用户操作
      * 返回用户操作代码
-     * @return
      */
     public static int showOpera() {
         System.out.println();
@@ -87,7 +86,6 @@ public class Main {
         }else if(i == 3) {
             try {
                 Drinks drink = machine.sell(currentUser);
-                //原来：drink.ad 这样效果是一样的，但是如果你想在所以的drinks方法前面都加一句话呢？（不要局限于当前这里，可以想象很多个地方都有这个要求）
                 currentUser.drinks(drink);
             }catch (Exception e) {
                 System.out.println(e.getMessage());

@@ -35,8 +35,8 @@ public class VendingMachine {
     public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException {
         double money = user.getMoney();
         double discount = user.getDiscount();
-        String name = user.prefer();
-        Drinks drink = null;
+        String name = user.getPreferDrinks();
+        Drinks drink;
 
         for (Shelf shelf : shelves) {
             String firstDrinkName = shelf.getFirstDrinkName();

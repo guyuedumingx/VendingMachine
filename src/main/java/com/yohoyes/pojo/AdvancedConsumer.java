@@ -8,14 +8,10 @@ package com.yohoyes.pojo;
  * @author Florence
  */
 public class AdvancedConsumer extends User {
+
     public AdvancedConsumer(String name) {
         super(name, "advanced");
         preferDrinks = "Pepsi";
-    }
-
-    @Override
-    public String prefer() {
-        return preferDrinks;
     }
 
     @Override

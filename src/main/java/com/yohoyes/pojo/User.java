@@ -5,14 +5,26 @@ import com.yohoyes.beverages.Drinkable;
 /**
  * 用户的公有类
  *
- * 学习目标： 多态 抽象类
+ * 学习目标： 多态 抽象类 修饰符作用域(public protected private default)
  * @author Florence
  */
 public abstract class User {
-    String name;
-    String identify;
-    String preferDrinks;
-    double money = 0;
+    /**
+     * 用户姓名
+     */
+    private String name;
+    /**
+     * 用户身份
+     */
+    private String identify;
+    /**
+     * 用户喜欢喝的饮料
+     */
+    protected String preferDrinks;
+    /**
+     * 用户拥有的金钱
+     */
+    private double money = 0;
 
     public User(String name,String identify){
         this.name=name;
@@ -21,13 +33,13 @@ public abstract class User {
 
     /**
      * 这个用户想买什么饮料
-     * @return
      */
-    public abstract String prefer();
+    public String getPreferDrinks() {
+        return preferDrinks;
+    }
 
     /**
      * 设置用户喜欢的饮料品种
-     * @param name
      */
     public void setPreferDrinks(String name) {
         preferDrinks = name;
@@ -35,7 +47,6 @@ public abstract class User {
 
     /**
      * 获取用户名字
-     * @return
      */
     public String getName() {
         return name;
@@ -43,7 +54,6 @@ public abstract class User {
 
     /**
      * 设置用户名字
-     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -72,7 +82,7 @@ public abstract class User {
 
     /**
      * 设置用户的钱数
-     * @param money
+     * @param money 钱数
      */
     public void setMoney(double money) {
         this.money = money;
@@ -92,7 +102,7 @@ public abstract class User {
 
     /**
      * 不同的用户有不同的折扣
-     * @return
+     * @return 折扣
      */
     public abstract double getDiscount();
 
@@ -104,5 +114,4 @@ public abstract class User {
         System.out.print("广告语：");
         drink.ad();
     }
-
 }

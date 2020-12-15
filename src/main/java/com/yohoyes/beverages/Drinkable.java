@@ -11,12 +11,12 @@ public interface Drinkable {
     /**
      * 广告语
      */
-    public void ad();
+    void ad();
 
     /**
      * 获取饮料的价格
      * @return price
      */
-    public double getPrice();
+    double getPrice();
 
 }

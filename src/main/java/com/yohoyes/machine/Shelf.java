@@ -82,7 +82,6 @@ public class Shelf {
 
     /**
      * 获取货架中第一瓶饮料
-     * @return
      */
     public Drinks peek() {
         return shelf.peek();

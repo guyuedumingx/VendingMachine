@@ -9,14 +9,10 @@ package com.yohoyes.pojo;
  * @author Florence
  */
 public class CommonConsumer extends User {
+
     public CommonConsumer(String name) {
         super(name, "common");
-    }
-
-    @Override
-    public String prefer() {
-
-        return "Coco";
+        preferDrinks = "Coco";
     }
 
     @Override

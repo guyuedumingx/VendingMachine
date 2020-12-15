@@ -12,9 +12,6 @@ public abstract class Drinks implements Drinkable {
     protected String unit = "ml";
     protected String name;
 
-
-    public Drinks() {}
-
     public Drinks(String name, double price) {
         this.name = name;
         this.price = price;
