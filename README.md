@@ -29,8 +29,8 @@
 
 ### UML类图  
 
-![UML](./src/main/resources/UML.png)  
+![UML](./src/main/resources/UML.jpg)  
 
 **PDF**  
 
-![UML](./src/main/resources/UML.pdf)    
+[UML](./src/main/resources/UML.pdf)    
