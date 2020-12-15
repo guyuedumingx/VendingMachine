@@ -2,6 +2,7 @@ package com.yohoyes.machine;
 import com.yohoyes.beverages.Drinks;
 import com.yohoyes.exception.NoEnoughMoneyException;
 import com.yohoyes.exception.NoSuchDrinksException;
+import com.yohoyes.exception.NoSuchShelfException;
 import com.yohoyes.factory.DrinkFactory;
 import com.yohoyes.pojo.User;
 
@@ -14,7 +15,10 @@ import com.yohoyes.pojo.User;
  */
 public class VendingMachine {
     public static final int CAPACITY = 16;
-    Shelf[] shelves = new Shelf[CAPACITY];
+    private Shelf[] shelves = new Shelf[CAPACITY];
+
+    private Shelf curShelf;
+    private User user;
 
     /**
      * 在新建售卖机时就新建了多个货架
@@ -33,30 +37,51 @@ public class VendingMachine {
      * @throws NoEnoughMoneyException 如果这个人带的钱不够，就抛出该异常
      */
     public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException {
-        double money = user.getMoney();
-        double discount = user.getDiscount();
         String name = user.getPreferDrinks();
-        Drinks drink;
-
-        for (Shelf shelf : shelves) {
-            String firstDrinkName = shelf.getFirstDrinkName();
-            if (firstDrinkName.equals(name)) {
-                if (shelf.getFirstDrinkPrice() > money*discount) {
-                    throw new NoEnoughMoneyException();
-                }
-                drink = shelf.out();
-                double price = drink.getPrice();
-                money -= price * discount;
-                System.out.println("恭喜你成功购买了："+name +
-                        " 此次折扣为："+(discount*10)+"折 "+
-                        " 原价："+ price +
-                        " 折后价："+ price *discount);
-                user.setMoney(money);
-                return drink;
-            }
+        for(int i=0; i<CAPACITY; i++) {
+           curShelf = shelves[i];
+           String drinksName = curShelf.getFirstDrinkName();
+           if(drinksName.equals(name)){
+               try {
+                   return sell(user, i);
+               }catch (NoSuchShelfException e)  {
+                   System.out.println(e.getMessage());
+               }
+           }
         }
         throw new NoSuchDrinksException();
     }
+
+    public Drinks sell(User user, int shelfNumber) throws NoEnoughMoneyException, NoSuchShelfException {
+        if(shelfNumber>=CAPACITY) {
+            throw new NoSuchShelfException();
+        }
+        this.user = user;
+        curShelf = shelves[shelfNumber];
+        return sell();
+    }
+
+    private Drinks sell() throws NoEnoughMoneyException{
+        Drinks drinks = curShelf.peek();
+        double money = user.getMoney();
+        double discount = user.getDiscount();
+        double price = drinks.getPrice();
+        String name = drinks.getName();
+
+        if(drinks.getPrice() > money*discount) {
+            throw new NoEnoughMoneyException();
+        }else {
+            money -= price * discount;
+            System.out.println("恭喜你成功购买了："+name +
+                    " 此次折扣为："+(discount*10)+"折 "+
+                    " 原价："+ price +
+                    " 折后价："+ price *discount);
+            user.setMoney(money);
+            return curShelf.out();
+        }
+    }
+
+
 
     /**
      * 填充货架,可以自动把货架用随机饮料填满

@@ -47,8 +47,8 @@ public class Main {
         machine.show();
         currentUser = setOperator();
         int i = showOpera();
-        //操作符是7则退出
-        while (i != 7) {
+        //操作符是8则退出
+        while (i != 8) {
             opera(i);
             i = showOpera();
         }
@@ -63,11 +63,12 @@ public class Main {
         System.out.println();
         System.out.println("[1] 显示饮料机");
         System.out.println("[2] 充值");
-        System.out.println("[3] 购买");
+        System.out.println("[3] 购买用户喜欢的饮料");
         System.out.println("[4] 通知老板填充货架");
         System.out.println("[5] 切换用户");
         System.out.println("[6] 设置用户喜欢的饮料");
-        System.out.println("[7] 退出");
+        System.out.println("[7] 购买指定货架的饮料");
+        System.out.println("[8] 退出");
         System.out.print("请输入命令： ");
         return in.nextInt();
     }
@@ -79,17 +80,13 @@ public class Main {
     public static void opera(int i) {
         if(i == 1) {
             machine.show();
+            System.out.println("当前用户是: \t" + currentUser.getName());
             System.out.println("当前余额为: \t" + currentUser.getMoney() + "￥");
         }else if(i == 2) {
             System.out.print("充值金额： ");
             currentUser.topUp(in.nextInt());
         }else if(i == 3) {
-            try {
-                Drinks drink = machine.sell(currentUser);
-                currentUser.drinks(drink);
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            buyPreferDrink();
         }else if(i == 4) {
             machine.fillShelf();
             System.out.println("货架填充完成");
@@ -98,9 +95,29 @@ public class Main {
         }else if(i == 6){
             System.out.print(currentUser.getName()+" 喜欢的饮料是: ");
             currentUser.setPreferDrinks(in.next());
+        }else if(i == 7){
+            buyDrinksByNumber();
         }else {
             System.out.println("输入错误");
+        }
+    }
 
+    private static void buyPreferDrink() {
+        try {
+            Drinks drink = machine.sell(currentUser);
+            currentUser.drinks(drink);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void buyDrinksByNumber() {
+        System.out.print("请输入货架编号: ");
+        try {
+            Drinks drink = machine.sell(currentUser, in.nextInt()-1);
+            currentUser.drinks(drink);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -113,6 +130,9 @@ public class Main {
         User get = userMap.get(name);
         if(get == null) {
             System.out.println("没有该用户!");
+            if(currentUser == null) {
+                return setOperator();
+            }
             return currentUser;
         }
         return get;
