@@ -6,12 +6,17 @@ import com.yohoyes.beverages.Drinks;
  * @author Florence
  */
 public class CommonConsumer extends User {
-    CommonConsumer(String name, String identify) {
-        super(name, identify);
+    public CommonConsumer(String name) {
+        super(name, "common");
     }
 
     @Override
-    public Drinks buy() {
-        return null;
+    public String prefer() {
+        return "Coco";
+    }
+
+    @Override
+    public double getDiscount() {
+        return 0.98;
     }
 }

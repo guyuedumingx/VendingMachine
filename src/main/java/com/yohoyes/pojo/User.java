@@ -1,8 +1,6 @@
 package com.yohoyes.pojo;
 
-import com.yohoyes.beverages.Drinks;
-
-import javax.jws.soap.SOAPBinding;
+import com.yohoyes.beverages.Drinkable;
 
 /**
  * @author Florence
@@ -10,12 +8,14 @@ import javax.jws.soap.SOAPBinding;
 public abstract class User {
     String name;
     String identify;
-    User(String name,String identify){
+    double money = 0;
+
+    public User(String name,String identify){
         this.name=name;
         this.identify=identify;
     }
-    public abstract Drinks buy();
 
+    public abstract String prefer();
 
     public String getName() {
         return name;
@@ -32,4 +32,19 @@ public abstract class User {
     public void setIdentify(String identify) {
         this.identify = identify;
     }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void topUp(double money) {
+        this.money += money;
+    }
+
+    public abstract double getDiscount();
+
+    public void drinks(Drinkable drink) {
+        drink.ad();
+    }
+
 }

@@ -3,6 +3,7 @@ import com.yohoyes.beverages.Drinks;
 import com.yohoyes.exception.NoEnoughMoneyException;
 import com.yohoyes.exception.NoSuchDrinksException;
 import com.yohoyes.factory.DrinkFactory;
+import com.yohoyes.pojo.User;
 
 /**
  * 售卖机
@@ -18,38 +19,37 @@ public class VendingMachine {
         }
     }
 
-    /**
-     *现有金钱
-     */
-    private int money = 0;
-
-    public Drinks buy(String name) throws NoSuchDrinksException, NoEnoughMoneyException {
+    public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException {
+        double money = user.getMoney();
+        double discount = user.getDiscount();
+        String name = user.prefer();
         Drinks drink = null;
+
         for (Shelf shelf : shelves) {
             String firstDrinkName = shelf.getFirstDrinkName();
             if (firstDrinkName.equals(name)) {
-                if (shelf.getFirstDrinkPrice() > money) {
+                if (shelf.getFirstDrinkPrice() > money*discount) {
                     throw new NoEnoughMoneyException();
                 }
                 drink = shelf.out();
-                money -= drink.getPrice();
+                money -= drink.getPrice() * discount;
+                user.topUp(money);
                 return drink;
             }
         }
         throw new NoSuchDrinksException();
     }
-
-    /**
-     * 充值
-     */
-    public void topUp(int money) {
-        if(money <= 0) {
-            System.out.println("充值失败");
-        }else {
-            this.money += money;
-            System.out.println("充值成功");
-        }
-    }
+//    /**
+//     * 充值
+//     */
+//    public void topUp(int money) {
+//        if(money <= 0) {
+//            System.out.println("充值失败");
+//        }else {
+//            this.money += money;
+//            System.out.println("充值成功");
+//        }
+//    }
 
     /**
      * 填充货架
@@ -88,6 +88,5 @@ public class VendingMachine {
             System.out.print(shelf.getDrinksNumber() + "\t\t");
         }
         System.out.println();
-        System.out.println("当前余额为：\t" + money + "￥");
     }
 }

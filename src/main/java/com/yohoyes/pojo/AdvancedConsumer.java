@@ -6,12 +6,17 @@ import com.yohoyes.beverages.Drinks;
  * @author Florence
  */
 public class AdvancedConsumer extends User {
-    AdvancedConsumer(String name, String identify) {
-        super(name, identify);
+    public AdvancedConsumer(String name) {
+        super(name, "advanced");
     }
 
     @Override
-    public Drinks buy() {
-        return null;
+    public String prefer() {
+        return "Pepsi";
+    }
+
+    @Override
+    public double getDiscount() {
+        return 0.6;
     }
 }

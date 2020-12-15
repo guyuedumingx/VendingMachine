@@ -23,11 +23,6 @@ public abstract class Drinks implements Drinkable {
         return price;
     }
 
-    @Override
-    public void drinks() {
-        System.out.println("你喝了 "+ getCapacity() + "的 " + getName());
-    }
-
     public String getCapacity() {
         return capacity+getUnit();
     }

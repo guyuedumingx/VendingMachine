@@ -12,4 +12,9 @@ public class Bear extends Drinks {
         super("Bear",5);
         this.setCapacity(250);
     }
+
+    @Override
+    public void ad() {
+        System.out.printf("我有故事，你有酒吗？");
+    }
 }

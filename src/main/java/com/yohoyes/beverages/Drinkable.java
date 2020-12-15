@@ -7,9 +7,9 @@ package com.yohoyes.beverages;
 public interface Drinkable {
 
     /**
-     * 喝
+     * 广告语
      */
-    public void drinks();
+    public void ad();
 
     /**
      * 获取饮料的价格
