@@ -33,7 +33,7 @@ public class VendingMachine {
                 }
                 drink = shelf.out();
                 money -= drink.getPrice() * discount;
-                user.topUp(money);
+                user.setMoney(money);
                 return drink;
             }
         }

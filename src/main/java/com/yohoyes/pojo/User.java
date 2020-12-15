@@ -37,6 +37,10 @@ public abstract class User {
         return money;
     }
 
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
     public void topUp(double money) {
         this.money += money;
     }
