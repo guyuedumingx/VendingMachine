@@ -45,7 +45,12 @@ public class VendingMachine {
                     throw new NoEnoughMoneyException();
                 }
                 drink = shelf.out();
-                money -= drink.getPrice() * discount;
+                double price = drink.getPrice();
+                money -= price * discount;
+                System.out.println("恭喜你成功购买了："+name +
+                        " 此次折扣为："+(discount*10)+"折 "+
+                        " 原价："+ price +
+                        " 折后价："+ price *discount);
                 user.setMoney(money);
                 return drink;
             }

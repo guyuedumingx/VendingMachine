@@ -101,6 +101,7 @@ public abstract class User {
      * @param drink 饮料对象
      */
     public void drinks(Drinkable drink) {
+        System.out.print("广告语：");
         drink.ad();
     }
 

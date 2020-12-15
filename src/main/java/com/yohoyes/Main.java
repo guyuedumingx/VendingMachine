@@ -87,7 +87,7 @@ public class Main {
         }else if(i == 3) {
             try {
                 Drinks drink = machine.sell(currentUser);
-                drink.ad();
+                currentUser.drinks(drink);
             }catch (Exception e) {
                 System.out.println(e.getMessage());
             }
