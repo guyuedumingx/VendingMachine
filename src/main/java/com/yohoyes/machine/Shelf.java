@@ -5,8 +5,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 货架
+ * 货架对象
  * 每一个货架都有CAPACITY个放饮料的位置
+ * 每一个货架中有很多瓶饮料，但饮料机的货架中我们只能操作第一瓶饮料
+ *
+ * 学习目标： 队列（如果没学过队列，你能用其他结构来实现同样的功能吗，比如说数组）
  * @author yohoyes
  */
 public class Shelf {
@@ -27,12 +30,15 @@ public class Shelf {
         return shelf.size() == CAPACITY;
     }
 
+    /**
+     * 查看货架是不是空的
+     */
     public boolean isEmpty() {
         return shelf.size() == 0;
     }
 
     /**
-     * 填充货架
+     * 根据传入的饮料填充货架
      * @param drink 填充的饮料
      */
     public void add(Drinks drink) {
@@ -74,6 +80,10 @@ public class Shelf {
         return shelf.peek().getPrice();
     }
 
+    /**
+     * 获取货架中第一瓶饮料
+     * @return
+     */
     public Drinks peek() {
         return shelf.peek();
     }

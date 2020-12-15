@@ -4,6 +4,8 @@ import com.yohoyes.beverages.Drinks;
 
 /**
  * 啤酒
+ *
+ *学习目标： 多态 继承
  * @author yohoyes
  */
 public class Bear extends Drinks {

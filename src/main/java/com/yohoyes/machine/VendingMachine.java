@@ -6,19 +6,32 @@ import com.yohoyes.factory.DrinkFactory;
 import com.yohoyes.pojo.User;
 
 /**
- * 售卖机
+ * 售卖机对象，每一个售卖机对象都有CAPACITY个货架(Shelf)对象，货架里面包含有多个空位，
+ * 每个空位可以放置一瓶饮料对象
+ *
+ * 学习目标： final是什么意思  构造函数  抛异常 异常是什么 \t是什么意思
  * @author yohoyes
  */
 public class VendingMachine {
     public static final int CAPACITY = 16;
     Shelf[] shelves = new Shelf[CAPACITY];
 
+    /**
+     * 在新建售卖机时就新建了多个货架
+     */
     public VendingMachine() {
         for(int i=0; i<CAPACITY; i++) {
             shelves[i] = new Shelf();
         }
     }
 
+    /**
+     * 卖饮料
+     * @param user 谁要买饮料，就把谁传进来
+     * @return 返回购买成功的饮料
+     * @throws NoSuchDrinksException 如果这个人想买的饮料在饮料机的第一行没有，就抛出该异常
+     * @throws NoEnoughMoneyException 如果这个人带的钱不够，就抛出该异常
+     */
     public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException {
         double money = user.getMoney();
         double discount = user.getDiscount();
@@ -39,20 +52,9 @@ public class VendingMachine {
         }
         throw new NoSuchDrinksException();
     }
-//    /**
-//     * 充值
-//     */
-//    public void topUp(int money) {
-//        if(money <= 0) {
-//            System.out.println("充值失败");
-//        }else {
-//            this.money += money;
-//            System.out.println("充值成功");
-//        }
-//    }
 
     /**
-     * 填充货架
+     * 填充货架,可以自动把货架用随机饮料填满
      */
     public void fillShelf() {
         for(Shelf shelf : shelves) {
@@ -62,6 +64,9 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * 显示售卖机
+     */
     public void show() {
         System.out.print("编号：\t");
         for(int i=1; i<=CAPACITY; i++) {

@@ -4,6 +4,8 @@ import com.yohoyes.beverages.Drinks;
 
 /**
  * 百事可乐
+ *
+ * 学习目标： 多态
  * @author yohoyes
  */
 public class Pepsi extends Drinks {

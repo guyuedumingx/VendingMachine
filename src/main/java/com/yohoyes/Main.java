@@ -10,15 +10,31 @@ import java.util.Scanner;
 
 /**
  *程序入口
+ * 默认提供两个账户
+ * 会员账户： 允晴
+ * 普通账户： 允晴2号
+ *
+ * 学习目标：static是什么 Scanner怎么用 Map是什么 静态代码块
  * @author yohoyes
  */
 public class Main {
     static Scanner in = new Scanner(System.in);
+    /**
+     * 饮料售货机对象
+     */
     static VendingMachine machine = new VendingMachine();
-
+    /**
+     * 程序的用户列表
+     */
     static Map<String, User> userMap = new HashMap<>();
+    /**
+     * 程序当前的操作者
+     */
     static User currentUser = null;
 
+    /**
+     * 初始化生成用户并把用户添加到用户列表中
+     */
     static {
         User advanced = UserFactory.buildUser("允晴","advanced");
         User common = UserFactory.buildUser("允晴2号","common");
@@ -31,12 +47,19 @@ public class Main {
         machine.show();
         currentUser = setOperator();
         int i = showOpera();
+        //操作符是6则退出
         while (i != 6) {
             opera(i);
             i = showOpera();
         }
     }
 
+    /**
+     * 显示操作帮助
+     * 等待用户操作
+     * 返回用户操作代码
+     * @return
+     */
     public static int showOpera() {
         System.out.println();
         System.out.println("[1] 显示饮料机");
@@ -49,6 +72,10 @@ public class Main {
         return in.nextInt();
     }
 
+    /**
+     * 执行用户输入的操作
+     * @param i 操作码
+     */
     public static void opera(int i) {
         if(i == 1) {
             machine.show();
@@ -74,6 +101,9 @@ public class Main {
         }
     }
 
+    /**
+     * 设置程序的用户帐号
+     */
     public static User setOperator() {
         System.out.print("你想要使用的用户名是: ");
         String name = in.next();
@@ -84,5 +114,4 @@ public class Main {
         }
         return get;
     }
-
 }

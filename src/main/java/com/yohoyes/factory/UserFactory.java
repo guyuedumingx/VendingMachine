@@ -6,6 +6,8 @@ import com.yohoyes.pojo.User;
 
 /**
  * 用户工厂类
+ *
+ * 学习目标： 工厂类是干嘛用的 没有行不行 有的话有什么好处
  * @author yohoyes
  */
 public class UserFactory {

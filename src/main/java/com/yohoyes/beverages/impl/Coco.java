@@ -4,6 +4,8 @@ import com.yohoyes.beverages.Drinks;
 
 /**
  * 可口可乐
+ *
+ * 学习目标： 多态 继承
  * @author yohoyes
  */
 public class Coco extends Drinks {

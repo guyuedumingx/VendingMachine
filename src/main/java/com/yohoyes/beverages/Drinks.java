@@ -2,6 +2,8 @@ package com.yohoyes.beverages;
 
 /**
  * 饮料的实现类
+ *
+ * 学习目标： 抽象类 继承
  * @author yohoyes
  */
 public abstract class Drinks implements Drinkable {

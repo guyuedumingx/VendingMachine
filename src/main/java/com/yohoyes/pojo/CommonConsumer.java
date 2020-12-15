@@ -1,8 +1,9 @@
 package com.yohoyes.pojo;
 
-import com.yohoyes.beverages.Drinks;
 
 /**
+ * 普通用户
+ * 享受0.98折购买优惠
  * @author Florence
  */
 public class CommonConsumer extends User {
@@ -12,6 +13,7 @@ public class CommonConsumer extends User {
 
     @Override
     public String prefer() {
+
         return "Coco";
     }
 

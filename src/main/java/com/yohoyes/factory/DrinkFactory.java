@@ -7,6 +7,8 @@ import com.yohoyes.beverages.impl.Pepsi;
 
 /**
  * 饮料工厂
+ *
+ * 学习目标： 工厂类是干嘛用的 没有行不行 有的话有什么好处
  * @author yohoyes
  */
 public class DrinkFactory {
