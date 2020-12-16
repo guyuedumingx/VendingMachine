@@ -7,6 +7,6 @@ package com.yohoyes.exception;
 public class NoSuchShelfException extends Exception{
 
     public NoSuchShelfException() {
-        super("没有这个货架哦");
+        super("没有这个货架");
     }
 }

@@ -1,5 +1,6 @@
 package com.yohoyes.machine;
 import com.yohoyes.beverages.Drinks;
+import com.yohoyes.exception.EmptyShelfException;
 import com.yohoyes.exception.NoEnoughMoneyException;
 import com.yohoyes.exception.NoSuchDrinksException;
 import com.yohoyes.exception.NoSuchShelfException;
@@ -14,7 +15,7 @@ import com.yohoyes.pojo.User;
  * @author yohoyes
  */
 public class VendingMachine {
-    public static final int CAPACITY = 16;
+    public static final int CAPACITY = 6;
     private Shelf[] shelves = new Shelf[CAPACITY];
 
     private Shelf curShelf;
@@ -36,7 +37,7 @@ public class VendingMachine {
      * @throws NoSuchDrinksException 如果这个人想买的饮料在饮料机的第一行没有，就抛出该异常
      * @throws NoEnoughMoneyException 如果这个人带的钱不够，就抛出该异常
      */
-    public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException {
+    public Drinks sell(User user) throws NoSuchDrinksException, NoEnoughMoneyException, EmptyShelfException{
         String name = user.getPreferDrinks();
         for(int i=0; i<CAPACITY; i++) {
            curShelf = shelves[i];
@@ -52,7 +53,7 @@ public class VendingMachine {
         throw new NoSuchDrinksException();
     }
 
-    public Drinks sell(User user, int shelfNumber) throws NoEnoughMoneyException, NoSuchShelfException {
+    public Drinks sell(User user, int shelfNumber) throws NoEnoughMoneyException, NoSuchShelfException, EmptyShelfException {
         if(shelfNumber>=CAPACITY) {
             throw new NoSuchShelfException();
         }
@@ -61,7 +62,10 @@ public class VendingMachine {
         return sell();
     }
 
-    private Drinks sell() throws NoEnoughMoneyException{
+    private Drinks sell() throws NoEnoughMoneyException, EmptyShelfException {
+        if(curShelf.isEmpty()){
+            throw new EmptyShelfException();
+        }
         Drinks drinks = curShelf.peek();
         double money = user.getMoney();
         double discount = user.getDiscount();
@@ -72,10 +76,10 @@ public class VendingMachine {
             throw new NoEnoughMoneyException();
         }else {
             money -= price * discount;
-            System.out.println("恭喜你成功购买了："+name +
+            System.out.printf("恭喜你成功购买了："+name +
                     " 此次折扣为："+(discount*10)+"折 "+
                     " 原价："+ price +
-                    " 折后价："+ price *discount);
+                    " 折后价：%.2f\n",price *discount);
             user.setMoney(money);
             return curShelf.out();
         }
@@ -98,6 +102,8 @@ public class VendingMachine {
      * 显示售卖机
      */
     public void show() {
+        System.out.println();
+        System.out.println("===============================================================================================");
         System.out.print("编号：\t");
         for(int i=1; i<=CAPACITY; i++) {
             System.out.print(i+"\t\t");
@@ -105,7 +111,7 @@ public class VendingMachine {
         System.out.println();
         System.out.print("名称：\t");
         for(Shelf shelf : shelves) {
-            System.out.print(shelf.getFirstDrinkName()+"\t");
+            System.out.print(shelf.getFirstDrinkName()+"\t\t");
         }
         System.out.println();
         System.out.print("价格：\t");
@@ -115,7 +121,11 @@ public class VendingMachine {
         System.out.println();
         System.out.print("容量：\t");
         for(Shelf shelf : shelves) {
-            System.out.print(shelf.peek().getCapacity()+"\t");
+            try {
+                System.out.print(shelf.peek().getCapacity() + "\t\t");
+            }catch (EmptyShelfException e) {
+                System.out.print("\t\t");
+            }
         }
         System.out.println();
         System.out.print("数量：\t");
@@ -123,5 +133,6 @@ public class VendingMachine {
             System.out.print(shelf.getDrinksNumber() + "\t\t");
         }
         System.out.println();
+        System.out.println("===============================================================================================");
     }
 }

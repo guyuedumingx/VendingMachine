@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  *程序入口
  * 默认提供两个账户
- * 会员账户： 允晴
+ * 会员账户： 允晴 root
  * 普通账户： 允晴2号
  *
  * 学习目标：static是什么 Scanner怎么用 Map是什么 静态代码块
@@ -37,12 +37,15 @@ public class Main {
      */
     static {
         User advanced = UserFactory.buildUser("允晴","advanced");
+        User root = UserFactory.buildUser("root","advanced");
         User common = UserFactory.buildUser("允晴2号","common");
         userMap.put(advanced.getName(),advanced);
         userMap.put(common.getName(), common);
+        userMap.put(root.getName(), root);
     }
 
     public static void main(String[] args) {
+        welcome();
         machine.fillShelf();
         machine.show();
         currentUser = setOperator();
@@ -52,6 +55,7 @@ public class Main {
             opera(i);
             i = showOpera();
         }
+        end();
     }
 
     /**
@@ -61,6 +65,7 @@ public class Main {
      */
     public static int showOpera() {
         System.out.println();
+        System.out.println("--------------------");
         System.out.println("[1] 显示饮料机");
         System.out.println("[2] 充值");
         System.out.println("[3] 购买用户喜欢的饮料");
@@ -69,6 +74,7 @@ public class Main {
         System.out.println("[6] 设置用户喜欢的饮料");
         System.out.println("[7] 购买指定货架的饮料");
         System.out.println("[8] 退出");
+        System.out.println("--------------------");
         System.out.print("请输入命令： ");
         return in.nextInt();
     }
@@ -81,7 +87,7 @@ public class Main {
         if(i == 1) {
             machine.show();
             System.out.println("当前用户是: \t" + currentUser.getName());
-            System.out.println("当前余额为: \t" + currentUser.getMoney() + "￥");
+            System.out.printf("当前余额为: \t%.2f￥\n" , currentUser.getMoney());
         }else if(i == 2) {
             System.out.print("充值金额： ");
             currentUser.topUp(in.nextInt());
@@ -117,6 +123,7 @@ public class Main {
             Drinks drink = machine.sell(currentUser, in.nextInt()-1);
             currentUser.drinks(drink);
         }catch (Exception e) {
+            System.out.println();
             System.out.println(e.getMessage());
         }
     }
@@ -136,5 +143,21 @@ public class Main {
             return currentUser;
         }
         return get;
+    }
+
+    public static void welcome() {
+        System.out.println("欢迎使用2020爪哇部落后面端第一次考核Demo!");
+        System.out.println("本程序仅限考核交流使用!");
+        System.out.println("你能模拟出这个程序吗?");
+        System.out.println("祝你好运!");
+        System.out.println("--------------------------------------");
+        System.out.println("温馨提示：抄作业别找CSDN! 太憨了!!!!");
+        System.out.println("默认用户名是： 允晴 允晴2号 root");
+        System.out.println();
+    }
+
+    public static void end() {
+        System.out.println("实现了吗？");
+        System.out.println("继续努力哦!!!");
     }
 }
