@@ -1,6 +1,6 @@
 ## Java饮料自动售货机  
 
-![VendingMachine](https://socialify.git.ci/guyuedumingx/VendingMachine/image?font=Raleway&language=1&pattern=Circuit%20Board&theme=Dark)
+![VendingMachine](https://socialify.git.ci/guyuedumingx/VendingMachine/image?font=Raleway&language=1&pattern=Circuit%20Board&theme=Dark)   
 实现一个自动售出饮料的机器，用与练习java的面向对象，接口，继承，多态，抽象类等基础知识  
 
 目录结构:  
