@@ -1,6 +1,8 @@
 package com.yohoyes.machine;
 
 import com.yohoyes.beverages.Drinks;
+import com.yohoyes.exception.EmptyShelfException;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -83,7 +85,11 @@ public class Shelf {
     /**
      * 获取货架中第一瓶饮料
      */
-    public Drinks peek() {
-        return shelf.peek();
+    public Drinks peek() throws EmptyShelfException {
+        Drinks peek = shelf.peek();
+        if(peek == null) {
+            throw new EmptyShelfException();
+        }
+        return peek;
     }
 }

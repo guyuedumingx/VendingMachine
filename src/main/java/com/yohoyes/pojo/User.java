@@ -94,6 +94,8 @@ public abstract class User {
     public void topUp(double money) {
         if(money <= 0) {
             System.out.println("充值失败");
+        }else if(money > 100){
+            System.out.println("数额太大，充值失败");
         }else {
             this.money += money;
             System.out.println("充值成功");

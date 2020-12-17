@@ -9,6 +9,6 @@ package com.yohoyes.exception;
 public class NoEnoughMoneyException extends Exception{
 
     public NoEnoughMoneyException() {
-        super("金钱不足");
+        super("余额不足");
     }
 }
