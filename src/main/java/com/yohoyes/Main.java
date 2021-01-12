@@ -76,7 +76,12 @@ public class Main {
         System.out.println("[8] 退出");
         System.out.println("--------------------");
         System.out.print("请输入命令： ");
-        return in.nextInt();
+        String next = in.next();
+        try {
+            return Integer.valueOf(next);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**
