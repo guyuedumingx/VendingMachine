@@ -76,12 +76,7 @@ public class Main {
         System.out.println("[8] 退出");
         System.out.println("--------------------");
         System.out.print("请输入命令： ");
-        String next = in.next();
-        try {
-            return Integer.valueOf(next);
-        } catch (Exception e) {
-            return 0;
-        }
+        return getNumber();
     }
 
     /**
@@ -95,13 +90,7 @@ public class Main {
             System.out.printf("当前余额为: \t%.2f￥\n" , currentUser.getMoney());
         }else if(i == 2) {
             System.out.print("充值金额： ");
-            String next = in.next();
-            try {
-                int money = Integer.valueOf(next);
-                currentUser.topUp(money);
-            } catch (NumberFormatException e) {
-                System.out.println("请输入正确的金额!");
-            }
+            currentUser.topUp(getNumber());
         }else if(i == 3) {
             buyPreferDrink();
         }else if(i == 4) {
@@ -131,11 +120,23 @@ public class Main {
     private static void buyDrinksByNumber() {
         System.out.print("请输入货架编号: ");
         try {
-            Drinks drink = machine.sell(currentUser, in.nextInt()-1);
+            Drinks drink = machine.sell(currentUser, getNumber()-1);
             currentUser.drinks(drink);
         }catch (Exception e) {
             System.out.println();
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static int getNumber() {
+        String next = in.next();
+        try{
+            int number = Integer.valueOf(next);
+            return number;
+        }catch (Exception e) {
+            System.out.println("您的输入不合法!");
+            System.out.print("请重新输入: ");
+            return getNumber();
         }
     }
 
