@@ -95,7 +95,13 @@ public class Main {
             System.out.printf("当前余额为: \t%.2f￥\n" , currentUser.getMoney());
         }else if(i == 2) {
             System.out.print("充值金额： ");
-            currentUser.topUp(in.nextInt());
+            String next = in.next();
+            try {
+                int money = Integer.valueOf(next);
+                currentUser.topUp(money);
+            } catch (NumberFormatException e) {
+                System.out.println("请输入正确的金额!");
+            }
         }else if(i == 3) {
             buyPreferDrink();
         }else if(i == 4) {
